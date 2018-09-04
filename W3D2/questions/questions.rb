@@ -20,13 +20,16 @@ class Table
   #   @class_name = class_name
   # end
 
-  def self.all(*a)
+  def self.all
     data = QuestionDBConnection.instance.execute("SELECT * FROM #{to_s}s")
     data.map {|datum| Object.const_get(to_s).new(datum)}
   end
 
-  def self.find_by_id(*a, id)
-    data = QuestionDBConnection.instance.execute(<<-SQL, to_s, id)
+  def self.find_by_id(id)
+
+    temp = to_s + 's'
+
+    data = QuestionDBConnection.instance.execute(<<-SQL, temp, id)
       SELECT
         *
       FROM
@@ -34,8 +37,9 @@ class Table
       WHERE
         id = ?
     SQL
-    return nil unless results.length > 0
-    to_object.new(data.first)
+
+    return nil unless data.length > 0
+    Object.const_get(to_s).new(data.first)
   end
 
   def to_s
