@@ -1,5 +1,6 @@
 require 'sqlite3'
 require 'singleton'
+require 'byebug'
 
 class QuestionDBConnection < SQLite3::Database
   include Singleton
@@ -26,16 +27,14 @@ class Table
   end
 
   def self.find_by_id(id)
-
-    temp = to_s + 's'
-
-    data = QuestionDBConnection.instance.execute(<<-SQL, temp, id)
+    # data = QuestionDBConnection.instance.execute("SELECT * FROM #{temp} WHERE id = #{id}")
+    data = QuestionDBConnection.instance.execute(<<-SQL, id: id)
       SELECT
         *
       FROM
-        ?
+        #{to_s}s
       WHERE
-        id = ?
+        :id = id
     SQL
 
     return nil unless data.length > 0

@@ -1,3 +1,4 @@
+require_relative "./questions.rb"
 
 class QuestionFollow
   attr_accessor :user_id, :question_id
