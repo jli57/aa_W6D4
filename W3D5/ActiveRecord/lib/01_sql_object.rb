@@ -4,6 +4,7 @@ require 'active_support/inflector'
 # of this project. It was only a warm up.
 
 class SQLObject
+
   def self.columns
     return @columns if @columns
 
@@ -14,11 +15,12 @@ class SQLObject
         #{self.table_name}
     SQL
 
+    @col_names = columns.first.join(", ")
     @columns = columns.first.map!(&:to_sym)
+
   end
 
   def self.finalize!
-
     self.columns.each do |name|
       define_method(name) do
         self.attributes[name]
@@ -35,7 +37,7 @@ class SQLObject
   end
 
   def self.table_name
-    @table_name || self.name.downcase + 's'
+    @table_name || self.name.tableize
 
   end
 
@@ -47,15 +49,27 @@ class SQLObject
         #{table_name}
     SQL
 
-
+    self.parse_all(columns)
   end
 
   def self.parse_all(results)
-    # ...
+   results.map { |result| self.new(result) }
   end
 
   def self.find(id)
-    # ...
+    # self.all.find { |obj| obj.id == id }
+    my_hash = DBConnection.execute(<<-SQL)
+      SELECT
+        *
+      FROM
+        #{self.table_name}
+      WHERE
+        id = #{id}
+    SQL
+
+    return nil if my_hash.empty?
+
+    self.new(my_hash.first)
   end
 
   def initialize(params = {})
@@ -69,15 +83,26 @@ class SQLObject
   end
 
   def attributes
-    @attributes ||= {}
+    @attributes || @attributes = {}
   end
 
   def attribute_values
-    self.class.columns.map {|name| self.send(:name)}
+    self.class.columns.map {|name| self.send(name)}
   end
 
   def insert
-    # ...
+    question_marks = (["?"] * (self.attribute_values.count - 1)).join(", ")
+    col_names = self.class.columns.drop(1).join(", ")
+
+    my_hash = DBConnection.execute(<<-SQL, *attribute_values.drop(1))
+      INSERT INTO
+        #{self.class.table_name} (#{col_names})
+      VALUES
+        (#{question_marks})
+    SQL
+
+    self.id = DBConnection.last_insert_row_id
+
   end
 
   def update
