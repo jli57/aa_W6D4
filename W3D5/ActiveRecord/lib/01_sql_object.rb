@@ -106,10 +106,36 @@ class SQLObject
   end
 
   def update
-    # ...
+    question_marks = (["?"] * (self.attribute_values.count - 1)).join(", ")
+
+    set_string = ""
+
+    self.class.columns.drop(1).each_with_index do |col_name, idx|
+      col_value = self.attribute_values.drop(1)[idx]
+      if col_value.is_a?(Integer)
+        set_string += "#{col_name} = #{col_value}, "
+      else
+        set_string += "#{col_name} = '#{col_value}', "
+      end
+    end
+
+    set_string = set_string[0...-2]
+
+    DBConnection.execute(<<-SQL)
+      UPDATE
+        #{self.class.table_name}
+      SET
+        #{set_string}
+      WHERE
+        id = #{attribute_values.first}
+    SQL
   end
 
   def save
-    # ...
+    if self.id.nil?
+      insert
+    else
+      update
+    end 
   end
 end
