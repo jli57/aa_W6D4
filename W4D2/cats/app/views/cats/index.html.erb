@@ -1,0 +1,6 @@
+<h1>SHOWING ALL KITTIES!</h1>
+
+<% @cats.each do |cat| %>
+  <%= render 'show', cat: cat %>
+  <br>
+<% end %>

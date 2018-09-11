@@ -1,0 +1,14 @@
+<h1>What? The kitty was already perfect!</h1>
+
+
+
+<% cat = @cat %>
+<form action="/cats/<%= cat.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="patch">
+
+  <%= render "form", cat: @cat%>
+
+  <input type="submit" value="Edit this Kitty!">
+
+</form>
