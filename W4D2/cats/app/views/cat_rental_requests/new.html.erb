@@ -1,0 +1,33 @@
+<h1>RENTAL REQUESTS!</h1>
+
+<form action="/cats" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+
+  <label>Cat:
+    <select name="cat_rental_request[cat_id]" id="cat_color">
+     <option disabled selected>-- select a cat --</option>
+
+       <% Cat.all.each do |cat| %>
+
+         <option value="<%= cat.name %>"> <%= cat.name %> </option>
+
+       <% end %>
+     </select>
+  </label><br><br>
+
+
+  <label>Start Date:
+    <input type="date" name="cat_rental_request[start_date]" value="">
+  </label><br><br>
+
+  <label>End Date:
+    <input type="date" name="cat_rental_request[end_date]" value="">
+  </label><br><br>
+
+
+
+
+  <input type="submit" value="Rent that Kitty!, PLEASE">
+
+  </form>

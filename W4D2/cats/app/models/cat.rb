@@ -17,12 +17,23 @@ class Cat < ApplicationRecord
   validates :color, inclusion: { in: %w(brown black hotpink grey white)}
   validates :sex, inclusion: { in: %w(M F)}
 
+  has_many :rental_requests,
+    foreign_key: :cat_id,
+    class_name: :CatRentalRequest,
+    dependent: :destroy
+
   def age
     Time.now.year - birth_date.year
   end
 
   def self.cat_colors
     %w(brown black hotpink grey white)
+  end
+
+  def over_lapping_requests
+    CatRentalRequest.
+    Cat.rental_requests
+      .where()
   end
 
 end
