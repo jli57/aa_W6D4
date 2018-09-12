@@ -5,16 +5,25 @@ class SessionsController < ApplicationController
   end
   
   def create
-    @user = user.new(user_params)
+    @user = User.find_by_credentials(params[:user][:username], params[:user][:password])
     
+    if @user
+      login!(@user)
+      redirect_to user_url(@user)
+    else
+      flash.now
+    end 
+
   end
   
   def destroy
+    logout! 
+    redirect_to new_session_url
   end
   
   private
-  def user_params
-    params.require(:user).permit(:username, :password)
-  end
+  # def user_params
+  #   params.require(:user).permit(:username, :password)
+  # end
 
 end

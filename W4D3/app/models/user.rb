@@ -18,7 +18,7 @@ class User < ApplicationRecord
   
   def reset_session_token!
     self.session_token = SecureRandom.urlsafe_base64
-    self.save!
+    self.save
     self.session_token
   end 
   
@@ -28,7 +28,7 @@ class User < ApplicationRecord
   end
   
   def is_password?(pw)
-    BCrypt::Password.new(self.password_digest).is_password(pw)
+    BCrypt::Password.new(self.password_digest).is_password?(pw)
   end
   
   def User.find_by_credentials(username, pw)

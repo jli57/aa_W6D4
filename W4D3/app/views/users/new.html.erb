@@ -1,6 +1,11 @@
 <h1>NEW CAT RENTER</h1>
 
+<% flash[:errors].each do |message| %>
+  <%= message %> <br>
+<% end %>
 <form class="" action="/users" method="post">
+  <br>
+
   <label>Username:
   
     <input type="text" name="user[username]" value="">
