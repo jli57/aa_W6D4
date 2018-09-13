@@ -1,0 +1,16 @@
+<h1>Make a hot new user!</h1>
+
+<%= flash[:errors] %>
+
+
+<form action="/users" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  
+  Email: <input type="text" name="user[email]" value="">
+  <br><br>
+  Password: <input type="password" name="user[password]" value="">
+  <br><br>
+  
+  <input type="submit" name="" value="JOIN US">
+  
+</form>

@@ -1,0 +1,27 @@
+<h1> Make a new album! </h1>
+
+<%= flash[:errors] %>
+
+<form action="/albums" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  
+  Title: <input type="text" name="album[title]" value="">
+  <br><br>
+  Year: <input type="text" name="album[year]" value="">
+  <br><br>
+  Live Album?: Yes<input type="radio" name="album[live]" value="true">
+  No<input type="radio" name="album[live]" value="false" checked>
+  <br><br>
+  Band: <select class="" name="album[band_id]">
+    <option value="" selected disabled>--CHOOSE BAND--</option>
+    <% Band.all.each do |band| %>
+      <option
+          value="<%= band.id %>">
+          <%= band.name %>
+      </option>
+    <% end %>
+  </select>
+  <br><br>
+  
+  <input type="submit" name="" value="SICK ALBUM!">
+</form>

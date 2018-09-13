@@ -1,0 +1,18 @@
+<h1>HI IM A SWEET BAND</h1>
+
+<p>Name: <%= @band.name %> </p>
+
+<% @band.albums.each do |album| %>
+  <form class="" action= "<%= album_url(album) %>" method="get">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="submit" name="" value="<%= album.title %>">
+  </form>
+<% end %>
+
+<br><br>
+
+<form class="" action= "<%= band_url(@band) %>" method="get">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" name="" value="Delete <%= @band.name %>">
+</form>

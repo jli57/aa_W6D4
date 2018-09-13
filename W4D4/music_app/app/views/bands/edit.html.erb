@@ -1,0 +1,13 @@
+<h1>Agreed, that band suck.  Change it!</h1>
+
+<%= flash[:errors] %>
+
+
+<form action="/bands" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="patch">
+  New Band Name: <input type="text" name="band[name]" value="<%= @band.name %>">
+  
+  <input type="submit" name="" value="NOW ACTUALLY THE NEXT BIG THING">
+  
+</form>

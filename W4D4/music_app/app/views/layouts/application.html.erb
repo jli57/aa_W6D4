@@ -1,5 +1,30 @@
 <!DOCTYPE html>
+
 <html>
+
+<style>
+
+  header {
+    color: purple;
+    background-color: lightpink;
+    font-size: 40px;
+    
+    
+  }
+  img {
+    display: inline-block
+  }
+  
+  body {
+    background-color: lightpink
+  }
+  
+  nav {
+    float: right
+  }
+
+</style>
+  
   <head>
     <title>MusicApp</title>
     <%= csrf_meta_tags %>
@@ -8,8 +33,46 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  
+    <header>
+      <center>DIS MY MUSIC APP</center>
+    </header>
+  <br>
+  <% if logged_in? %>
+    <nav>
+      
 
+      Logged in as: <%= current_user.email %>
+      <br>
+      <form class="" action="/session" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="delete">
+        
+        <input type="submit" name="" value="Sign out Boyyo">
+      </form>
+    <% else %>
+      <form class="" action="/session/new" method="get">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" name="" value="Login">
+      </form>
+      
+      <form class="" action="/users/new" method="get">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" name="" value="Sign Up">
+      </form>
+    <% end %>
+  
+    </nav>
+  
+  <br><br><br>
   <body>
+    <center>
+    <img src="https://2.bp.blogspot.com/-BX7vQBr4lxw/WqgLW-qZpMI/AAAAAAAAO1M/ri9GxvTBRvAA0IVINsv5AXK5xfB5XaxDACLcBGAs/s1600/cat%2Bguitar.jpg" alt="kitties" height="250" width="250">
+    <img src="https://i.dailymail.co.uk/i/pix/2015/02/25/24D63B0B00000578-2965148-Cats_have_been_caught_on_camera_playing_the_piano_like_this_one_-m-14_1424884591051.jpg" alt="pianokitty" height="250" width="250">
+    <img src="https://pbs.twimg.com/media/ChJd_T5W4AEJfNG.jpg" alt="kitties" height="250" width="250">
+    </center>
     <%= yield %>
   </body>
+
+  <footer> <center> ALL ASSETS BELONG TO GOOSE 2018 </center></footer>
 </html>
