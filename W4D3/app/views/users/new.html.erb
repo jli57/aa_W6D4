@@ -1,9 +1,12 @@
 <h1>NEW CAT RENTER</h1>
-
-<% flash[:errors].each do |message| %>
-  <%= message %> <br>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |message| %>
+    <%= message %> <br>
+  <% end %>
 <% end %>
+
 <form class="" action="/users" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <br>
 
   <label>Username:

@@ -1,7 +1,9 @@
 <h1><%= @cat.name %></h1>
 
+<%  if flash[:errors] %>
 <% flash[:errors]. each do |message| %>
   <%= message %>
+  <% end %>
 <% end %>
 <table>
   <tr>
