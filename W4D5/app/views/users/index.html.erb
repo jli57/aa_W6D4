@@ -1,0 +1,9 @@
+<h1> Users Index Page</h1>
+
+<ul>
+  <% User.all.each do |user| %>
+    <li>
+      <a href="<%= user_url(user) %>"> <%= user.username %> </a>
+    </li>
+  <% end %>
+</ul>

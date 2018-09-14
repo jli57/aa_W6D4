@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capy</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
+    <style media="screen">
+      * {
+        font-family: 'Indie Flower', cursive;
+      }
+    </style>
+  </head>
+    <% if logged_in? %>
+      <form action="/session" method="post">
+        <input
+          type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>"
+        >
+        <input type="hidden" name="_method" value="delete">
+
+        <input type="submit" value="Logout?">
+
+      </form>
+
+    <% else %>
+      <form action="/session" method="get">
+        <input
+          type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>"
+        >
+
+        <input type="submit" value="Login?">
+      </form>
+
+    <% end %>
+  <body>
+    <%= yield %>
+  </body>
+</html>
