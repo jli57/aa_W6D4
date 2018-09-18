@@ -15,19 +15,19 @@ class Post < ApplicationRecord
 
   validates :title, :user_id, presence: true
 
-  validates :count_subs, numericality: { greater_than: 0}
+  # validates :count_subs, numericality: { greater_than: 0}
 
   belongs_to :author,
     foreign_key: :user_id,
     class_name: :User
 
-  has_many :subs,
-    through: :post_subs,
-    source: :subs
-
   has_many :post_subs,
     inverse_of: :post,
     dependent: :destroy
+
+    has_many :subs,
+    through: :post_subs,
+    source: :sub
 
   # has_many :post_subs,
   #   foreign_key: :post_id,

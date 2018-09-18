@@ -19,11 +19,14 @@
 <br><br>
 
 <h2>PICK SOME SUBS LUV</h2>
-  <% @subs.each do |sub| %>
-    <input type="radio" name="post[sub_id]" value="<%= sub.id %>"> <%= sub.title %>
+  <input type="hidden" name="post[sub_ids][]" value="">
+
+  <% Sub.all.each do |sub| %>
+    <input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>"> <%= sub.title %>
+    <%= "checked" if @post.sub_ids.include?(sub.id) %>
     <br>
   <% end %>
-<br>
+  <br>
   <input type="submit" name="" value="Submit a spicy post">
 
 </form>

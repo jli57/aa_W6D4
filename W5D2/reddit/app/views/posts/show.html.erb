@@ -1,12 +1,16 @@
 
 <h2>Showing a post on Rika Reddit</h2>
-
-<%= @post.title %> by <%= @post.author.username %>
-Content: <%= @post.content %>
+<br>
+<%= @post.title %> by <%= @post.author.username %> <br>
+Content: <%= @post.content %> <br><br>
 
 <!-- upvote -->
 <!-- downvote button -->
 
+<% @post.subs.each do |sub| %>
+  <a href="<%= sub_url(sub) %>"> <%= sub.title %> </a>
+  <br>
+<% end %>
 
 <h3>BANISH THE POST! KILL IT!</h3>
 
