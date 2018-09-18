@@ -1,0 +1,22 @@
+.my_list_ya {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  
+  li {
+    font-family: $sans-serif
+  }
+  
+
+  li:hover {
+    background-color: hotpink;
+    border-bottom: 3px solid purple;
+    
+  }
+}
+
+.nav_ya {
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
