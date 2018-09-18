@@ -1,0 +1,29 @@
+<h1>New Post!!!!</h1>
+
+
+<form action="<%=posts_url %>" method="post">
+  <input type="hidden" name="authenticity_token"
+  value="<%=form_authenticity_token %>">
+
+  <label>Title
+  <input type="text" name="post[title]" value="<%=@post.title %>">
+  </label>
+  <br>
+  <label>URL
+  <input type="text" name="post[url]" value="<%=@post.url%>">
+  </label>
+<br>
+  <label>Content
+  <input type="text" name="post[content]" value="<%=@post.content%>">
+  </label>
+<br><br>
+
+<h2>PICK SOME SUBS LUV</h2>
+  <% @subs.each do |sub| %>
+    <input type="radio" name="post[sub_id]" value="<%= sub.id %>"> <%= sub.title %>
+    <br>
+  <% end %>
+<br>
+  <input type="submit" name="" value="Submit a spicy post">
+
+</form>

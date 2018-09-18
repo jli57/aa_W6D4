@@ -1,0 +1,32 @@
+<h1>EDIT A SWEET POST</h1>
+
+
+
+
+
+
+<form action="<%=post_url(@post)%>" method="post">
+  <input type="hidden" name="authenticity_token"
+  value="<%=form_authenticity_token %>">
+
+  <input type="hidden" name="_method" value="patch">
+
+  <label>Title
+  <input type="text" name="post[title]" value="<%=@post.title %>">
+  </label>
+
+  <label>URL
+  <input type="text" name="post[url]" value="<%=@post.url%>">
+  </label>
+
+  <label>Content
+  <input type="text" name="post[content]" value="<%=@post.content%>">
+  </label>
+
+  <% @subs.each do |sub| %>
+    <input type="radio" name="post[sub_id]" value="<%= sub.id %>"> <%= sub.title %>
+  <% end %>
+
+  <input type="submit" name="" value="Edit a sweet post!!!">
+
+</form>
