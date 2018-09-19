@@ -22,3 +22,9 @@ Content: <%= @post.content %> <br><br>
 
   <input type="submit" name="" value="GOODBYE POST">
 </form>
+
+<% @post.comments.each do |comment| %>
+  <%= comment.content %>
+<% end %>
+
+<a href="<%= new_post_comment_url(@post)%> ">New Comment</a>

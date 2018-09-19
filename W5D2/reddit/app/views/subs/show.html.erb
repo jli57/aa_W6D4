@@ -3,3 +3,10 @@
 <h2> <%=@sub.title %> </h2>
 <br>
 <%= @sub.description %>
+<br><br>
+
+<% @sub.posts.each do |post| %>
+  <a href="<%= post_url(post) %>"><%= post.title %></a>
+<% end %>
+
+<a href="/posts/new">New Posty Boy!</a>
