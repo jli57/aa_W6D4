@@ -26,13 +26,14 @@ Function.prototype.myBind = function (context) {
 };
 
 Function.prototype.myBind2 = function (ctx, ...args) {
-  let that = this;
-  return function(...callArgs) {
-    return that.apply(ctx, args.concat(callArgs));
-  };
+  return (...callArgs) => this.apply(ctx, args.concat(callArgs));
 };
 
-function curriedSum(numArgs){
+// notes
+// function myBind(fn, ctx, ...args)
+//
+
+function curriedSum(numArgs) {
   numbers = [];
   let _curriedSum = function(num){
     numbers.push(num);
@@ -59,7 +60,7 @@ Function.prototype.stephCurry = function(numArgs){
   let _threePointer = function(arg){ // are we only passing one at a time?
     args.push(arg);
     if (args.length === numArgs) {
-      return that.apply(null, args); //why null?
+      return that.apply(that, args); //why null?
     }else {
       return _threePointer;
     }
@@ -71,13 +72,13 @@ Function.prototype.sethCurry = function(numArgs){
   let that = this;
   // let args = Array.from(arguments).slice(1);
   let args = [];
-  let _threePointer = function(arg){ // are we only passing one at a time?
+  let _warmBench = function(arg){ // are we only passing one at a time?
     args.push(arg);
     if (args.length === numArgs) {
-      return that.call(null, ...args); //why null?
+      return that(...args); //why null?
     }else {
-      return _threePointer;
+      return _warmBench;
     }
   };
-  return _threePointer;
+  return _warmBench;
 };
