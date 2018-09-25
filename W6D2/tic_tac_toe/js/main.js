@@ -1,6 +1,16 @@
-const View = // require appropriate file
-const Game = // require appropriate file
+const View = require("./ttt-view.js");
+const Game = require("./game.js");// require appropriate file
+
+s = new Game();
 
 $( () => {
-  // Your code here
+  let myGame = new Game();
+  new View(myGame, $(".ttt"));
+  
+  // $("figure.ttt").css("background-color", "hotpink");
+
+  
 });
+
+
+

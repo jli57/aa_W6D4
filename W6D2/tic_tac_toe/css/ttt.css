@@ -1,0 +1,45 @@
+.ttt {
+  width: 337px;
+  height: 500px;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: purple;
+  padding-inline-start: 0px
+}
+
+li {
+  height: 96px;
+  width: 96px;
+  margin: 5px;
+  border: 3px solid black;
+  list-style: none;
+  background-color: white;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 75px;
+}
+
+.x {
+  color: red;
+  
+}
+
+.o {
+  color: green;
+  
+  
+}
+li:hover{
+  background-color: lightpink;
+  
+  
+  
+}
+
+.filled {
+  background-color: aquamarine;
+}
