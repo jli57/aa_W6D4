@@ -1,0 +1,44 @@
+/* PHASE 9: Forms */
+
+.form{
+  width: 500px;
+  height: 400px;
+  background-color: aquamarine;
+  float: left;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+}
+
+#thumbnail {
+  float: left;
+  margin: 10px;
+}
+
+.input {
+  background-color: lightpink;
+  border-radius: 5px;
+  border: 1px solid gray;
+  color: purple;
+  margin: 5px 10px;
+}
+
+.label {
+  margin: 5px 10px;
+}
+
+.submit {
+  padding: 15px;
+  margin: 10px;
+  font-weight: bold;
+  background-color: darksalmon;
+  color: white;
+  border-radius: 5px;
+}
+
+.submit-buttons {
+  display: flex;
+  flex-direction: row;
+}
