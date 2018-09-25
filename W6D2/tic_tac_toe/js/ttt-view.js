@@ -12,6 +12,7 @@ class View {
   bindEvents() {
     
     this.$el.on("click", "li", e => {
+      debugger;
       const $square = $(e.currentTarget);
       this.makeMove($square);
     });
@@ -25,7 +26,7 @@ class View {
 
   
   makeMove($square) {
-    
+    debugger;
     this.game.playMove($square.data("pos"));
 
     
@@ -40,7 +41,7 @@ class View {
     $square.addClass(this.game.currentPlayer);
     $square.append(this.game.currentPlayer);
     // switch turns
-      // debugger;
+      
       let x = this.game.board;
       let y = this.game.winner();
     if (this.game.isOver()) {
