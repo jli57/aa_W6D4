@@ -8,6 +8,7 @@ class FollowToggle {
     this.render();
 
     this.$el.on('click', this.handleClick.bind(this));
+    
   }
 
   handleClick(event) {

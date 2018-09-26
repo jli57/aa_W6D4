@@ -102,8 +102,17 @@ const APIUtil = {
   changeFollowStatus: (id, myMethod) => (
     $.ajax({
       url: `/users/${id}/follow`,
+      method: myMethod,
+      dataType: 'json'
+    })
+  ),
+  
+  searchUsers: query => (
+    $.ajax({
+      url: '/users/search',
       dataType: 'json',
-      method: myMethod
+      method: 'GET',
+      data: { query }
     })
   ),
 
@@ -131,6 +140,7 @@ class FollowToggle {
     this.render();
 
     this.$el.on('click', this.handleClick.bind(this));
+    
   }
 
   handleClick(event) {
@@ -188,10 +198,62 @@ module.exports = FollowToggle;
 //require all necessary files
 
 const FollowToggle = __webpack_require__(/*! ./follow_toggle.js */ "./frontend/follow_toggle.js");
+const UsersSearch = __webpack_require__(/*! ./users_search */ "./frontend/users_search.js");
 
 $(function () {
+  $('.users-search').each( (i, search) => new UsersSearch(search) );
   $('button.follow-toggle').each( (i, btn) => new FollowToggle(btn, {}) );
 });
+
+/***/ }),
+
+/***/ "./frontend/users_search.js":
+/*!**********************************!*\
+  !*** ./frontend/users_search.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+const APIUtil = __webpack_require__(/*! ./api_util */ "./frontend/api_util.js");
+
+
+class UsersSearch {
+  constructor(el) {
+    this.$el = $(el);
+    this.$input = this.$el.find('input[name=username]');
+    this.$ul = this.$el.find('.users');
+
+    this.$input.on('input', this.handleInput.bind(this));
+  }
+
+  handleInput(event) {
+    if (this.$input.val() === '') {
+      this.renderResults([]);
+      return;
+    }
+    APIUtil.searchUsers(this.$input.val())
+      .then(users => this.renderResults(users));
+  }
+
+  renderResults(users) {
+    this.$ul.empty();
+
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+
+      let $a = $('<a></a>');
+      $a.text(`@${user.username}`);
+      $a.attr('href', `/users/${user.id}`);
+
+      const $li = $('<li></li>');
+      $li.append($a);
+
+      this.$ul.append($li);
+    }
+  }
+}
+
+module.exports = UsersSearch;
 
 
 /***/ })
